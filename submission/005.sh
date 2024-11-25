@@ -6,7 +6,7 @@ INPUTS_ARRAY=$(bitcoin-cli getrawtransaction $TX true | jq -c '.vin[]')
 
 PUBLIC_KEYS_ARRAY=()
 for INPUT in $INPUTS_ARRAY; do
-  TXINWITNESS=$(echo "$INPUT" | jq -r '.txinwitness[]' | tail -n 1)
+  TXINWITNESS=$(echo "$INPUT" | jq -r '.txinwitness[-1]')
   PUBLIC_KEYS_ARRAY+=("$TXINWITNESS")
 done
 
